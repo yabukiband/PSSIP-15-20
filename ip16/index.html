@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>ЛР16 — ООП в JavaScript</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f2f2;
+            text-align: center;
+            padding: 40px;
+        }
+        .game {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Лабораторная работа №16</h1>
+<h2>ООП-приложение на JavaScript</h2>
+
+<div class="game">
+    <p id="level">Уровень: 1</p>
+    <p id="score">Очки: 0</p>
+    <button onclick="game.click()">Клик</button>
+</div>
+
+<script>
+    /* БАЗОВЫЙ КЛАСС */
+    class Player {
+        constructor() {
+            this.score = 0;
+            this.level = 1;
+        }
+
+        addScore(points) {
+            this.score += points;
+            this.checkLevel();
+        }
+
+        checkLevel() {
+            if (this.score >= this.level * 10) {
+                this.level++;
+            }
+        }
+    }
+
+    /* НАСЛЕДОВАНИЕ */
+    class Game extends Player {
+        constructor() {
+            super();
+            this.pointsPerClick = 1;
+        }
+
+        click() {
+            this.addScore(this.pointsPerClick);
+            this.update();
+        }
+
+        update() {
+            document.getElementById("score").textContent =
+                "Очки: " + this.score;
+            document.getElementById("level").textContent =
+                "Уровень: " + this.level;
+        }
+    }
+
+    /* СОЗДАНИЕ ОБЪЕКТА */
+    const game = new Game();
+</script>
+
+</body>
+</html>

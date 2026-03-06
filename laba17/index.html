@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Интерфейсные события JavaScript</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+        }
+        section {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .box {
+            width: 100px;
+            height: 100px;
+            background: steelblue;
+            margin: 10px 0;
+        }
+        .drop {
+            width: 120px;
+            height: 120px;
+            border: 2px dashed #333;
+        }
+        .scroll-box {
+            height: 100px;
+            overflow-y: scroll;
+            border: 1px solid #999;
+        }
+        .scroll-box div {
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Интерфейсные события JavaScript</h1>
+
+<!-- 1. СОБЫТИЯ МЫШИ -->
+<section>
+    <h3>1. События мыши</h3>
+    <button onclick="mouseClick()">Клик</button>
+    <p id="mouseResult"></p>
+</section>
+
+<!-- 2. СОБЫТИЯ КЛАВИАТУРЫ -->
+<section>
+    <h3>2. События клавиатуры</h3>
+    <input onkeydown="keyPress(event)" placeholder="Нажмите клавишу">
+    <p id="keyResult"></p>
+</section>
+
+<!-- 3. DRAG & DROP -->
+<section>
+    <h3>3. Drag & Drop</h3>
+    <div class="box" draggable="true" ondragstart="drag(event)" id="dragBox"></div>
+    <div class="drop" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+</section>
+
+<!-- 4. СОБЫТИЯ УКАЗАТЕЛЯ -->
+<section>
+    <h3>4. События указателя</h3>
+    <div class="box" onpointerenter="pointerEnter()"></div>
+    <p id="pointerResult"></p>
+</section>
+
+<!-- 5. СОБЫТИЯ ПРОКРУТКИ -->
+<section>
+    <h3>5. События полосы прокрутки</h3>
+    <div class="scroll-box" onscroll="scrollEvent()">
+        <div></div>
+    </div>
+    <p id="scrollResult"></p>
+</section>
+
+<!-- 6. СЕНСОРНЫЕ СОБЫТИЯ -->
+<section>
+    <h3>6. События сенсорных экранов</h3>
+    <div class="box" ontouchstart="touchEvent()"></div>
+    <p id="touchResult"></p>
+</section>
+
+<!-- 7. СОБЫТИЯ ТАЙМЕРА -->
+<section>
+    <h3>7. События таймера</h3>
+    <button onclick="startTimer()">Запустить таймер</button>
+    <p id="timerResult"></p>
+</section>
+
+<script>
+    /* 1. Мышь */
+    function mouseClick() {
+        document.getElementById("mouseResult").textContent =
+            "Произошёл клик мышью";
+    }
+
+    /* 2. Клавиатура */
+    function keyPress(e) {
+        document.getElementById("keyResult").textContent =
+            "Нажата клавиша: " + e.key;
+    }
+
+    /* 3. Drag & Drop */
+    function allowDrop(e) {
+        e.preventDefault();
+    }
+
+    function drag(e) {
+        e.dataTransfer.setData("id", e.target.id);
+    }
+
+    function drop(e) {
+        e.preventDefault();
+        const data = e.dataTransfer.getData("id");
+        e.target.appendChild(document.getElementById(data));
+    }
+
+    /* 4. Указатель */
+    function pointerEnter() {
+        document.getElementById("pointerResult").textContent =
+            "Указатель наведён";
+    }
+
+    /* 5. Прокрутка */
+    function scrollEvent() {
+        document.getElementById("scrollResult").textContent =
+            "Выполняется прокрутка";
+    }
+
+    /* 6. Сенсор */
+    function touchEvent() {
+        document.getElementById("touchResult").textContent =
+            "Сенсорное касание";
+    }
+
+    /* 7. Таймер */
+    function startTimer() {
+        setTimeout(() => {
+            document.getElementById("timerResult").textContent =
+                "Таймер сработал через 3 секунды";
+        }, 3000);
+    }
+</script>
+
+</body>
+</html>
