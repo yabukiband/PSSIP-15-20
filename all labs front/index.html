@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторные работы</title>
+    <style>
+        iframe {
+            width: 100%;
+            height: 80vh;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Лабораторные работы</h1>
+
+<iframe id="lab-frame"></iframe>
+
+<div>
+    <button onclick="prevLab()">← Назад</button>
+    <button onclick="nextLab()">Далее →</button>
+</div>
+
+<script>
+    const labs = [
+        "ip3/index.html",
+        "ip4/index.html",
+        "ip5/index.html",
+        "ip6/index.html",
+        "ip9/index.html",
+        "ip10/index.html",
+        "ip14/index.html",
+        "ip15/index.html", // ЛР15 ООП JS
+        "ip16/index.html"  // ЛР16 ООП-приложение
+    ];
+
+    let currentLab = 0;
+    const frame = document.getElementById("lab-frame");
+
+    function loadLab() {
+        frame.src = labs[currentLab];
+    }
+
+    function nextLab() {
+        if (currentLab < labs.length - 1) {
+            currentLab++;
+            loadLab();
+        } else {
+            alert("Работ больше нет!");
+        }
+    }
+
+    function prevLab() {
+        if (currentLab > 0) {
+            currentLab--;
+            loadLab();
+        }
+    }
+
+    loadLab();
+</script>
+
+</body>
+</html>
